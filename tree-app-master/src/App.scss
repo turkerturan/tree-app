@@ -14,6 +14,7 @@
     background-color: #ebebf1;
   }
 }
+
 #github-button {
   position: fixed;
 }
@@ -25,11 +26,13 @@
     white-space: nowrap;
     margin: 0 auto;
     text-align: center;
+
     &::after {
       content: "";
       display: table;
       clear: both;
     }
+
     ul::before {
       content: "";
       position: absolute;
@@ -48,6 +51,7 @@
     list-style-type: none;
     position: relative;
     padding: 1em 0.5em 0 0.5em;
+
     &::before,
     &::after {
       content: "";
@@ -58,26 +62,32 @@
       width: 50%;
       height: 1em;
     }
+
     &::after {
       right: auto;
       left: 50%;
       border-left: 1px solid #ccc;
     }
+
     &:only-child::after,
     &:only-child::before {
       display: none;
     }
+
     &:only-child {
       padding-top: 0;
     }
+
     &:first-child::before,
     &:last-child::after {
       border: 0 none;
     }
+
     &:last-child::before {
       border-right: 1px solid #ccc;
       border-radius: 0 5px 0 0;
     }
+
     &:first-child::after {
       border-radius: 5px 0 0 0;
     }
@@ -100,6 +110,7 @@
     h4.alert-title {
       margin: 0 auto;
     }
+
     .alert-body {
       margin: 0.5rem auto 0;
     }
@@ -112,3 +123,46 @@
     justify-content: space-around;
   }
 }
+
+.rootCard {
+  max-width: 200;
+  margin: "auto";
+  position: "relative"
+}
+
+.cardHeader {
+  display: "flex";
+  justify-content: "flex-start";
+  align-items: "center";
+}
+
+.cardContent {
+  display: "flex";
+  flex-direction: "column";
+  justify-content: "flex-start";
+  align-items: "flex-start";
+  padding-top: "0";
+  padding-bottom: "0";
+}
+
+.cardText {
+  margin-top: "1rem";
+  font-size: "1rem";
+  font-weight: "bold"
+}
+
+.App {
+  align-items: center;
+  justify-content: center;
+  display: grid;
+}
+
+.requestTable {
+  font-style: italic;
+}
+
+//   input::-webkit-outer-spin-button,
+// input::-webkit-inner-spin-button {
+//   -webkit-appearance: none;
+//   margin: 0;
+// }
