@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { NodeItem } from '../types';
 import { haveRequest, selectNodeList, selectRequestList } from '../redux/selectors';
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TextField } from '@mui/material';
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TextField, Button } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -50,7 +50,7 @@ export default function CardMenu({ node }: { node: NodeItem }) {
         break;
 
       case "Request History":
-        setShowRequest(false)
+        setShowHistory(true)
         break;
 
       default:
@@ -76,8 +76,9 @@ export default function CardMenu({ node }: { node: NodeItem }) {
 
 
 
-  const PopupReq = (
+  const request = (
     <div>
+      <Button onClick={() => setShowRequest(false)}>Close</Button>
       <TableContainer component={Paper} >
         <Table aria-label="simple table" className='requestTable'>
           <TableHead>
@@ -127,6 +128,7 @@ export default function CardMenu({ node }: { node: NodeItem }) {
 
   const answerRequest = (
     <div>
+      <Button onClick={() => setAnswerTable(false)}>Close</Button>
       <TableContainer component={Paper} >
         <Table aria-label="simple table">
           <TableHead>
@@ -178,6 +180,49 @@ export default function CardMenu({ node }: { node: NodeItem }) {
     </div>
   )
 
+  const [showHistory, setShowHistory] = useState(false)
+
+  function createHistoryData(
+    sender: string,
+    point: number | null,
+    result: string,
+  ) {
+    return { sender, point, result };
+  }
+
+  const historyRow = requestList.filter(item => item.result !== "waiting" && item.receiver === node.name).map(item => createHistoryData(item.sender, item.amount, item.result))
+
+  const history = (
+    <div>
+      <Button onClick={() => setShowHistory(false)}>Close</Button>
+      <TableContainer component={Paper} >
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Nodes</TableCell>
+              <TableCell align="right">Points</TableCell>
+              <TableCell align="right">Results</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {historyRow.map((row) => (
+              <TableRow
+                key={row.sender}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.sender}
+                </TableCell>
+                <TableCell align="right">{row.point}</TableCell>
+                <TableCell align="right">{row.result}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  )
+
 
   return (
     <div>
@@ -213,8 +258,9 @@ export default function CardMenu({ node }: { node: NodeItem }) {
           setAnchorEl(null)
         }}>Answer Requests</MenuItem>}
       </Menu>
-      {showRequest ? PopupReq : null}
+      {showRequest && request}
       {answerTable && answerRequest}
+      {showHistory && history}
     </div>
   )
 }
