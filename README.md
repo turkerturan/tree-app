@@ -4,10 +4,10 @@ This project is a web application built with React and Redux for managing a tree
 
 ### Features
 
--Users can add new nodes to the tree structure.
--Users can edit the labels of existing nodes.
--Users can delete nodes from the tree structure.
--The application state is managed using Redux.
+1. Users can add new nodes to the tree structure.
+2. Users can edit the labels of existing nodes.
+3. Users can delete nodes from the tree structure.
+4. The application state is managed using Redux.
 
 ### Demo
 
